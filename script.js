@@ -26,6 +26,7 @@ const board = (() => {
   };
 
   const checkWin = () => {
+    // Check victory by row
     for (let row = 0; row < boardArr.length; row++) {
       for (let col = 0; col < boardArr[row].length; col++) {
         if (lastEdit.marker !== boardArr[row][col]) break;
@@ -33,6 +34,7 @@ const board = (() => {
       }
     }
 
+    // Check victory by col
     for (let col = 0; col < boardArr.length; col++) {
       for (let row = 0; row < boardArr.length; row++) {
         if (lastEdit.marker !== boardArr[row][col]) break;
@@ -40,6 +42,7 @@ const board = (() => {
       }
     }
 
+    // Check victory by diagonal
     if (
       (boardArr[0][0] === lastEdit.marker &&
         boardArr[1][1] === lastEdit.marker &&
