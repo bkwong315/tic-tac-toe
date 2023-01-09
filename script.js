@@ -5,28 +5,27 @@ const Player = (name, marker) => {
 const p1 = Player('Brian', 'X');
 const p2 = Player('Kevin', 'O');
 
-const Board = () => {
-  const board = [];
-
-  const getBoard = () => board;
-
-  const getCell = (row, col) => board[row][col];
-
-  const setCell = (row, col, marker) => {
-    board[row][col] = marker;
-  };
+const board = (() => {
+  const boardArr = [];
 
   for (let row = 0; row < 3; row++) {
-    board.push([]);
+    boardArr.push([]);
     for (let col = 0; col < 3; col++) {
-      board[row].push('');
+      boardArr[row].push('');
     }
   }
 
-  return { getBoard, setCell, getCell };
-};
+  const getBoard = () => boardArr;
 
-const board = Board();
+  const getCell = (row, col) => boardArr[row][col];
+
+  const setCell = (row, col, marker) => {
+    boardArr[row][col] = marker;
+  };
+
+  return { getBoard, setCell, getCell };
+})();
+
 board.setCell(0, 2, 'X');
 console.log(board.getCell(0, 2));
 console.table(board.getBoard());
