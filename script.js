@@ -29,6 +29,7 @@ const board = (() => {
 const game = (() => {
   const cells = document.querySelectorAll('.cell');
   let currPlayer = p1;
+  const getCurrPlayer = () => currPlayer;
 
   cells.forEach((cell) =>
     cell.addEventListener('click', (event) => {
@@ -39,18 +40,27 @@ const game = (() => {
 
       let img = document.createElement('img');
 
-      if (game.currPlayer.marker === 'X') {
+      if (game.getCurrPlayer().marker === 'X') {
         img.src = './imgs/cross.svg';
         img.alt = 'cross';
-      } else if (game.currPlayer.marker === 'O') {
+      } else if (game.getCurrPlayer().marker === 'O') {
         img.src = './imgs/circle.svg';
         img.alt = 'circle';
       }
 
       event.currentTarget.appendChild(img);
-      board.setCell(row, col, game.currPlayer.marker);
+      board.setCell(row, col, game.getCurrPlayer().marker);
+      game.endTurn();
     })
   );
 
-  return { currPlayer };
+  const endTurn = () => {
+    if (currPlayer === p1) {
+      currPlayer = p2;
+    } else {
+      currPlayer = p1;
+    }
+  };
+
+  return { getCurrPlayer, endTurn };
 })();
