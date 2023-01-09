@@ -74,6 +74,7 @@ const game = (() => {
       if (board.getCell(row, col) !== '') return;
 
       let img = document.createElement('img');
+      img.draggable = false;
 
       if (game.getCurrPlayer().marker === 'X') {
         img.src = './imgs/cross.svg';
