@@ -60,10 +60,14 @@ const board = (() => {
 const game = (() => {
   const cells = document.querySelectorAll('.cell');
   let currPlayer = p1;
+  let gameOver = false;
   const getCurrPlayer = () => currPlayer;
+  const getGameOver = () => gameOver;
 
   cells.forEach((cell) =>
     cell.addEventListener('click', (event) => {
+      if (game.getGameOver()) return;
+
       const row = event.currentTarget.dataset.row;
       const col = event.currentTarget.dataset.col;
 
@@ -86,7 +90,10 @@ const game = (() => {
   );
 
   const endTurn = () => {
+    if (gameOver) return;
+
     if (board.checkWin()) {
+      gameOver = true;
       console.log('You Win!');
     }
 
@@ -97,5 +104,5 @@ const game = (() => {
     }
   };
 
-  return { getCurrPlayer, endTurn };
+  return { getCurrPlayer, endTurn, getGameOver };
 })();
