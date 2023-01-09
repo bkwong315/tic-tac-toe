@@ -26,6 +26,31 @@ const board = (() => {
   return { getBoard, setCell, getCell };
 })();
 
-board.setCell(0, 2, 'X');
-console.log(board.getCell(0, 2));
-console.table(board.getBoard());
+const game = (() => {
+  const cells = document.querySelectorAll('.cell');
+  let currPlayer = p1;
+
+  cells.forEach((cell) =>
+    cell.addEventListener('click', (event) => {
+      const row = event.currentTarget.dataset.row;
+      const col = event.currentTarget.dataset.col;
+
+      if (board.getCell(row, col) !== '') return;
+
+      let img = document.createElement('img');
+
+      if (game.currPlayer.marker === 'X') {
+        img.src = './imgs/cross.svg';
+        img.alt = 'cross';
+      } else if (game.currPlayer.marker === 'O') {
+        img.src = './imgs/circle.svg';
+        img.alt = 'circle';
+      }
+
+      event.currentTarget.appendChild(img);
+      board.setCell(row, col, game.currPlayer.marker);
+    })
+  );
+
+  return { currPlayer };
+})();
