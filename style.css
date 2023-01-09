@@ -59,6 +59,7 @@ body {
 
 .board > .cell:hover {
   background: var(--cell-color-hover);
+  animation: grow 0.2s cubic-bezier(0.16, 0.68, 0.77, 0.94) forwards;
 }
 
 /*
@@ -74,5 +75,15 @@ body {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
   }
 }
