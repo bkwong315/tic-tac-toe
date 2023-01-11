@@ -90,7 +90,10 @@ const board = (() => {
     for (let row = 0; row < boardArr.length; row++) {
       for (let col = 0; col < boardArr[row].length; col++) {
         if (lastEdit.player.marker !== boardArr[row][col]) break;
-        if (col + 1 === boardArr.length) return true;
+        if (col + 1 === boardArr.length) {
+          emptySpace = true;
+          return true;
+        }
       }
     }
 
@@ -98,7 +101,10 @@ const board = (() => {
     for (let col = 0; col < boardArr.length; col++) {
       for (let row = 0; row < boardArr[col].length; row++) {
         if (lastEdit.player.marker !== boardArr[row][col]) break;
-        if (row + 1 === boardArr.length) return true;
+        if (row + 1 === boardArr.length) {
+          emptySpace = true;
+          return true;
+        }
       }
     }
 
@@ -111,6 +117,7 @@ const board = (() => {
         boardArr[1][1] === lastEdit.player.marker &&
         boardArr[2][0])
     ) {
+      emptySpace = true;
       return true;
     }
 
