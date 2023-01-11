@@ -150,6 +150,8 @@ const game = (() => {
 
       let img = document.createElement('img');
       img.draggable = false;
+      img.style.width = '100%';
+      img.style.height = '100%';
 
       if (game.getCurrPlayer().marker === 'X') {
         img.src = './imgs/cross.svg';
