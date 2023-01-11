@@ -228,14 +228,15 @@ input[type='checkbox']:checked + label::after {
   gap: 1rem;
 }
 
-.game-display > .info-box {
+.game-display > .turn-display {
+  box-sizing: border-box;
   color: white;
   font-weight: 700;
   font-size: 1.3rem;
   padding: 1rem;
   text-align: center;
-  padding: 1rem 4rem;
   border-radius: 10px;
+  width: 100%;
 
   /*
   * Animation adapted from Pen by Manuel Pinto

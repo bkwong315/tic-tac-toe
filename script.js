@@ -173,6 +173,17 @@ const game = (() => {
     p2 = player2;
     currPlayer = p1;
     gameDisplay.style.display = 'grid';
+    updateTurnDisplay();
+  };
+
+  const updateTurnDisplay = () => {
+    const turnDisplay = document.querySelector('.turn-display');
+    let displayedName = currPlayer.name;
+
+    if (currPlayer.name.length > 10)
+      displayedName = currPlayer.name.slice(0, 10);
+
+    turnDisplay.textContent = `${displayedName}'s Turn`;
   };
 
   const endTurn = () => {
@@ -192,6 +203,8 @@ const game = (() => {
     } else {
       currPlayer = p1;
     }
+
+    updateTurnDisplay();
   };
 
   return { getCurrPlayer, endTurn, getGameOver, startGame };
