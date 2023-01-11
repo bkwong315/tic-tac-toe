@@ -71,7 +71,7 @@ const board = (() => {
 
   const getEmptySpace = () => emptySpace;
 
-  const getlastEdit = () => lastEdit;
+  const getLastEdit = () => lastEdit;
 
   const checkGameOver = () => {
     emptySpace = false;
@@ -124,7 +124,7 @@ const board = (() => {
     getBoard,
     setCell,
     getCell,
-    getlastEdit,
+    getLastEdit,
     getEmptySpace,
   };
 })();
@@ -173,29 +173,38 @@ const game = (() => {
     p2 = player2;
     currPlayer = p1;
     gameDisplay.style.display = 'grid';
-    updateTurnDisplay();
+
+    let currName = currPlayer.name;
+    if (currName > 10) currName = currName.slice(0, 10);
+
+    updateInfoDisplay(`${currName}'s Turn`);
   };
 
-  const updateTurnDisplay = () => {
-    const turnDisplay = document.querySelector('.turn-display');
-    let displayedName = currPlayer.name;
-
-    if (currPlayer.name.length > 10)
-      displayedName = currPlayer.name.slice(0, 10);
-
-    turnDisplay.textContent = `${displayedName}'s Turn`;
+  const updateInfoDisplay = (displayedText) => {
+    document.querySelector('.info-display').textContent = displayedText;
   };
 
   const endTurn = () => {
     if (gameOver) return;
 
+    let displayedText;
+    let currName = currPlayer.name;
+    if (currName > 10) currName = currName.slice(0, 10);
+
     if (board.checkGameOver()) {
       gameOver = true;
+
       if (board.getEmptySpace()) {
-        alert(`${board.getlastEdit().player.name} wins!`);
+        currName = board.getLastEdit().player.name;
+        if (currName > 10) currName = currName.slice(0, 10);
+
+        displayedText = `${currName} wins!`;
       } else {
-        alert(`Draw!`);
+        displayedText = `Draw!`;
       }
+
+      updateInfoDisplay(displayedText);
+      return;
     }
 
     if (currPlayer === p1) {
@@ -204,7 +213,9 @@ const game = (() => {
       currPlayer = p1;
     }
 
-    updateTurnDisplay();
+    displayedText = `${currName}'s Turn`;
+
+    updateInfoDisplay(displayedText);
   };
 
   return { getCurrPlayer, endTurn, getGameOver, startGame };

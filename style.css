@@ -228,7 +228,7 @@ input[type='checkbox']:checked + label::after {
   gap: 1rem;
 }
 
-.game-display > .turn-display {
+.game-display > .info-display {
   box-sizing: border-box;
   color: white;
   font-weight: 700;
