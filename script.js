@@ -48,6 +48,12 @@ startBtn.addEventListener('click', (event) => {
   game.startGame(p1, p2);
 });
 
+const restartBtn = document.querySelector('.restart-btn');
+
+restartBtn.addEventListener('click', () => {
+  game.restartGame();
+});
+
 const board = (() => {
   const boardArr = [];
   let lastEdit = { row: 0, col: 0, player: {} };
@@ -72,6 +78,16 @@ const board = (() => {
   const getEmptySpace = () => emptySpace;
 
   const getLastEdit = () => lastEdit;
+
+  const reset = () => {
+    for (let row = 0; row < boardArr.length; row++) {
+      for (let col = 0; col < boardArr.length; col++) {
+        boardArr[row][col] = '';
+      }
+    }
+
+    lastEdit = { row: 0, col: 0, player: {} };
+  };
 
   const checkGameOver = () => {
     emptySpace = false;
@@ -133,6 +149,7 @@ const board = (() => {
     getCell,
     getLastEdit,
     getEmptySpace,
+    reset,
   };
 })();
 
@@ -191,6 +208,22 @@ const game = (() => {
     document.querySelector('.info-display').textContent = displayedText;
   };
 
+  const restartGame = () => {
+    board.reset();
+    gameOver = false;
+    currPlayer = p1;
+
+    cells.forEach((cell) => {
+      if (cell.children.length > 0) cell.removeChild(cell.children[0]);
+    });
+
+    let currName = currPlayer.name;
+    if (currName > 10) currName = currName.slice(0, 10);
+
+    updateInfoDisplay(`${currName}'s Turn`);
+    restartBtn.style.visibility = 'hidden';
+  };
+
   const endTurn = () => {
     if (gameOver) return;
 
@@ -211,6 +244,7 @@ const game = (() => {
       }
 
       updateInfoDisplay(displayedText);
+      restartBtn.style.visibility = 'visible';
       return;
     }
 
@@ -225,5 +259,5 @@ const game = (() => {
     updateInfoDisplay(displayedText);
   };
 
-  return { getCurrPlayer, endTurn, getGameOver, startGame };
+  return { getCurrPlayer, endTurn, getGameOver, startGame, restartGame };
 })();

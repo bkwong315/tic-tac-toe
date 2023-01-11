@@ -21,6 +21,7 @@
   --board-purple-color: #bcab79;
   --cell-color: #ffc759;
   --cell-color-hover: #ff8147;
+  --restart-btn-hover: rgba(191, 221, 255, 0.7);
 }
 
 body {
@@ -294,6 +295,28 @@ input[type='checkbox']:checked + label::after {
 .board > .cell:hover {
   background: var(--cell-color-hover);
   animation: grow 0.2s cubic-bezier(0.16, 0.68, 0.77, 0.94) forwards;
+}
+
+.restart-btn {
+  visibility: hidden;
+
+  /*
+  * Animation adapted from Pen by Manuel Pinto
+  * https://codepen.io/P1N2O/pen/pyBNzX
+  */
+  background: linear-gradient(
+    135deg,
+    var(--board-lavender-color),
+    var(--board-purple-color),
+    var(--board-lighter-blue-color),
+    var(--board-blue-color)
+  );
+  animation: gradient 15s cubic-bezier(0.46, 0.06, 0.47, 0.9) infinite;
+  background-size: 400%, 400%;
+}
+
+.restart-btn:hover {
+  background: var(--restart-btn-hover);
 }
 
 /*
