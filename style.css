@@ -222,9 +222,38 @@ input[type='checkbox']:checked + label::after {
   background: var(--form-btn-hover);
 }
 
-.board {
-  grid-area: 1 / 1 / 2 / 2;
+.game-display {
   display: none;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.game-display > .info-box {
+  color: white;
+  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 1rem;
+  text-align: center;
+  padding: 1rem 4rem;
+  border-radius: 10px;
+
+  /*
+  * Animation adapted from Pen by Manuel Pinto
+  * https://codepen.io/P1N2O/pen/pyBNzX
+  */
+  background: linear-gradient(
+    135deg,
+    var(--board-lavender-color),
+    var(--board-purple-color),
+    var(--board-lighter-blue-color),
+    var(--board-blue-color)
+  );
+  animation: gradient 15s cubic-bezier(0.46, 0.06, 0.47, 0.9) infinite;
+  background-size: 400%, 400%;
+}
+
+.board {
+  display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;

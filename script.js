@@ -167,12 +167,12 @@ const game = (() => {
   );
 
   const startGame = (player1, player2) => {
-    const board = document.querySelector('.board');
+    const gameDisplay = document.querySelector('.game-display');
 
     p1 = player1;
     p2 = player2;
     currPlayer = p1;
-    board.style.display = 'grid';
+    gameDisplay.style.display = 'grid';
   };
 
   const endTurn = () => {
