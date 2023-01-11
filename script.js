@@ -1,9 +1,48 @@
+const p1MarkerCheckbox = document.querySelector('#p1-marker');
+const p2MarkerCheckbox = document.querySelector('#p2-marker');
+
+p1MarkerCheckbox.addEventListener('click', (event) => {
+  if (p1MarkerCheckbox.checked === true) p2MarkerCheckbox.checked = false;
+  else p2MarkerCheckbox.checked = true;
+});
+
+p2MarkerCheckbox.addEventListener('click', (event) => {
+  if (p2MarkerCheckbox.checked === true) p1MarkerCheckbox.checked = false;
+  else p1MarkerCheckbox.checked = true;
+});
+
 const Player = (name, marker) => {
   return { name, marker };
 };
 
-const p1 = Player('Brian', 'X');
-const p2 = Player('Kevin', 'O');
+let p1 = {};
+let p2 = {};
+
+const startBtn = document.querySelector('.start-btn');
+
+startBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  const p1Name = document.querySelector('#p1-name');
+  const p2Name = document.querySelector('#p2-name');
+  const form = document.querySelector('form');
+  const board = document.querySelector('.board');
+  let p1Marker;
+  let p2Marker;
+
+  if (p1MarkerCheckbox.checked) {
+    p1Marker = 'X';
+    p2Marker = 'O';
+  } else {
+    p1Marker = 'O';
+    p2Marker = 'X';
+  }
+
+  p1 = Player(p1Name.value, p1Marker);
+  p2 = Player(p2Name.value, p2Marker);
+
+  form.style.display = 'none';
+  board.style.display = 'grid';
+});
 
 const board = (() => {
   const boardArr = [];

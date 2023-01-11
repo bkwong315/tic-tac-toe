@@ -9,6 +9,48 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
+    <form action="./" method="post">
+      <h2>Tic Tac Toe</h2>
+      <ul class="form-fields">
+        <li>
+          <fieldset>
+            <legend>Player 1</legend>
+            <div class="p1-name-container">
+              <input type="text" name="p1-name" id="p1-name" required autocomplete="off" placeholder=" "/>
+              <label for="p1-name">Name</label>
+              <div class="underline"></div>
+            </div>
+            <div class="p1-marker-container no-select">
+              <label>Marker</label>
+              <input
+                type="checkbox"
+                name="marker-selector"
+                id="p1-marker"
+                checked
+              />
+              <label for="p1-marker"></label>
+            </div>
+          </fieldset>
+          </div>
+        </li>
+        <li>
+          <fieldset>
+            <legend>Player 2</legend>
+            <div class="p2-name-container">
+              <input type="text" name="p2-name" id="p2-name" required autocomplete="off" placeholder=" " />
+              <label for="p2-name">Name</label>
+              <div class="underline"></div>
+            </div>
+            <div class="p2-marker-container no-select">
+              <label for="p2-marker">Marker</label>
+              <input type="checkbox" name="marker-selector" id="p2-marker" />
+              <label for="p2-marker"></label>
+            </div>
+          </fieldset>
+        </li>
+        <button class="btn start-btn" type="submit">Start Game!</button>
+      </ul>
+    </form>
     <div class="board">
       <div class="cell no-select" data-row="0" data-col="0"></div>
       <div class="cell no-select" data-row="0" data-col="1"></div>
