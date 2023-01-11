@@ -15,9 +15,6 @@ const Player = (name, marker) => {
   return { name, marker };
 };
 
-let p1 = {};
-let p2 = {};
-
 const startBtn = document.querySelector('.start-btn');
 
 startBtn.addEventListener('click', (event) => {
@@ -25,7 +22,14 @@ startBtn.addEventListener('click', (event) => {
   const p1Name = document.querySelector('#p1-name');
   const p2Name = document.querySelector('#p2-name');
   const form = document.querySelector('form');
-  const board = document.querySelector('.board');
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  let p1 = {};
+  let p2 = {};
   let p1Marker;
   let p2Marker;
 
@@ -41,7 +45,7 @@ startBtn.addEventListener('click', (event) => {
   p2 = Player(p2Name.value, p2Marker);
 
   form.style.display = 'none';
-  board.style.display = 'grid';
+  game.startGame(p1, p2);
 });
 
 const board = (() => {
@@ -127,8 +131,11 @@ const board = (() => {
 
 const game = (() => {
   const cells = document.querySelectorAll('.cell');
-  let currPlayer = p1;
+  let currPlayer = {};
   let gameOver = false;
+  let p1;
+  let p2;
+
   const getCurrPlayer = () => currPlayer;
   const getGameOver = () => gameOver;
 
@@ -158,6 +165,15 @@ const game = (() => {
     })
   );
 
+  const startGame = (player1, player2) => {
+    const board = document.querySelector('.board');
+
+    p1 = player1;
+    p2 = player2;
+    currPlayer = p1;
+    board.style.display = 'grid';
+  };
+
   const endTurn = () => {
     if (gameOver) return;
 
@@ -177,5 +193,5 @@ const game = (() => {
     }
   };
 
-  return { getCurrPlayer, endTurn, getGameOver };
+  return { getCurrPlayer, endTurn, getGameOver, startGame };
 })();
